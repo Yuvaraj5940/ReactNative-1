@@ -45,7 +45,7 @@ const ScanCard = ({navigation}) => {
         {/* <Ion name="scan-outline" style={Style.scanneroutline} />
         <FontAwesome5 name="file" style={Style.scanFile} />
         <Ion name="remove-outline" style={Style.horizontalLine} /> */}
-        <Image source={require('./Scan.png')} />
+        <Image source={require('./Images/Scan.png')} />
         <Text style={Style.scanNewCard}>Scan a new card</Text>
         <Text style={Style.ScanDesc}>
           Just tap on scan card to add contact from physical card

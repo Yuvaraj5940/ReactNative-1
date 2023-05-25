@@ -36,7 +36,7 @@ const SignUp = ({navigation}) => {
             Welcome to App
           </Text>
           <Image
-            source={require('./hi.png')}
+            source={require('./Images/hi.png')}
             style={{height: 30, width: 30, gap: 18}}
           />
         </View>

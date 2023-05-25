@@ -24,7 +24,7 @@ const WelcomePage = ({navigation}) => {
         Let’s make your first digital business card
       </Text>
       <Image
-        source={require('./Ellipse.png')}
+        source={require('./Images/Ellipse.png')}
         style={{
           height: 65,
           width: 65,
