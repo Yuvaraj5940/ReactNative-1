@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {
   View,
   Text,
@@ -5,18 +6,18 @@ import {
   Pressable,
   Image,
   ScrollView,
-  ActivityIndicator,
-  TouchableOpacity,
+  Modal,
 } from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Ion from 'react-native-vector-icons/Ionicons';
 import Style from './Style';
 import CameraVision from '../../CameraVision/CameraVision';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import ModalBox from '../../ModalBox/ModalBox';
+import WelcomePage from './WelcomePage';
+import SignUp from './SignUp';
+import LoginPage from './LoginPage';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -172,7 +173,7 @@ const Contacts = () => {
     </View>
   );
 };
-const Settings = () => {
+const Settings = ({navigation}) => {
   const settingBtn = [
     'Profile',
     'Share app',
@@ -185,31 +186,81 @@ const Settings = () => {
 
   return (
     <View style={Style.settingContainer}>
-      {!loading ? (
-        <>
-          <Text style={Style.settingText}>Settings</Text>
-          <View style={Style.sec} />
-          <View style={Style.btnContainer}>
-            <FlatList
-              data={settingBtn}
-              renderItem={({item}) => (
-                <View style={Style.btnDiv}>
-                  <Pressable style={Style.setBtn}>
-                    <Text style={Style.btnText}>{item}</Text>
-                  </Pressable>
-                  <FontAwesome5 name="chevron-right" style={Style.next} />
-                </View>
-              )}
-            />
-            <TouchableOpacity
-              onPress={() => setLoading(prev => !prev)}
-              style={Style.LogoutBtn}>
-              <Text style={Style.logout}>Logout?</Text>
-            </TouchableOpacity>
-          </View>
-        </>
-      ) : (
-        <ModalBox loading={loading} setLoading={setLoading} />
+      <Text style={Style.settingText}>Settings</Text>
+      <View style={Style.sec} />
+      <View style={Style.btnContainer}>
+        <FlatList
+          data={settingBtn}
+          renderItem={({item}) => (
+            <View style={Style.btnDiv}>
+              <Pressable style={Style.setBtn}>
+                <Text style={Style.btnText}>{item}</Text>
+              </Pressable>
+              <FontAwesome5 name="chevron-right" style={Style.next} />
+            </View>
+          )}
+        />
+        <View style={Style.LogoutBtn}>
+          <Pressable onPress={() => setLoading(true)}>
+            <Text style={Style.logout}>Logout?</Text>
+          </Pressable>
+        </View>
+      </View>
+      {loading && (
+        <View style={{height: '100%', width: '100%'}}>
+          <Modal visible={loading} transparent animationType="slide">
+            <View
+              style={{
+                height: 338,
+                width: '100%',
+                backgroundColor: '#FFFFFF',
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'absolute',
+                bottom: 0,
+                borderTopRightRadius: 20,
+                borderTopLeftRadius: 20,
+              }}>
+              <View
+                style={{
+                  width: 60,
+                  height: 7,
+                  backgroundColor: '#E5ECFF',
+                  position: 'absolute',
+                  top: 15,
+                  borderRadius: 42,
+                }}
+              />
+              <View style={Style.logoutContainer}>
+                <Text
+                  style={{
+                    color: '#2242D8',
+                    fontSize: 18,
+                    fontWeight: '500',
+                    marginBottom: 14,
+                  }}>
+                  Are you sure want to logout?
+                </Text>
+                <Text style={{width: 181, textAlign: 'center'}}>
+                  You will need to again enter your details to login
+                </Text>
+              </View>
+              <Pressable
+                style={Style.outConfirm}
+                onPress={() => {
+                  navigation.navigate('Welcome');
+                  setLoading(false);
+                }}>
+                <Text style={Style.outConfirmtext}>Yes, I want to</Text>
+              </Pressable>
+              <Pressable
+                onPress={() => setLoading(false)}
+                style={Style.outConfirm}>
+                <Text style={Style.outConfirmtext}>No, I don't want to</Text>
+              </Pressable>
+            </View>
+          </Modal>
+        </View>
       )}
     </View>
   );
@@ -285,6 +336,21 @@ const ScreenNavigation = () => {
           options={{header: () => null}}
         />
         <Stack.Screen name="Scan Id" component={CamPage} />
+        <Stack.Screen
+          name="Welcome"
+          component={WelcomePage}
+          options={{header: () => null}}
+        />
+        <Stack.Screen
+          name="SignUp"
+          component={SignUp}
+          options={{title: null}}
+        />
+        <Stack.Screen
+          name="Login"
+          component={LoginPage}
+          options={{title: null}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
