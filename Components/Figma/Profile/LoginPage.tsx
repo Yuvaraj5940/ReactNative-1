@@ -55,7 +55,7 @@ const LoginPage = ({navigation}) => {
           renderItem={({item}) => (
             <View style={Style.inputContainer}>
               <Text style={Style.placeholderTop}>{item}</Text>
-              <TextInput style={Style.placeholderBottom}>{item}</TextInput>
+              <TextInput style={Style.placeholderBottom} placeholder={item} />
             </View>
           )}
         />
@@ -77,7 +77,7 @@ const LoginPage = ({navigation}) => {
       </View>
       <Pressable
         style={Style.nxtBtn}
-        onPress={() => navigation.navigate('Bottom')}>
+        onPress={() => navigation.navigate('Cards')}>
         <Text style={{fontSize: 16, color: '#FFFFFF', fontWeight: '500'}}>
           Next
         </Text>

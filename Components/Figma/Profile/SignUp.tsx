@@ -56,7 +56,7 @@ const SignUp = ({navigation}) => {
           renderItem={({item}) => (
             <View style={Style.inputContainer}>
               <Text style={Style.placeholderTop}>{item}</Text>
-              <TextInput style={Style.placeholderBottom}>{item}</TextInput>
+              <TextInput style={Style.placeholderBottom} placeholder={item} />
             </View>
           )}
         />

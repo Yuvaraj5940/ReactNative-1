@@ -4,33 +4,66 @@ import {
   Text,
   FlatList,
   Pressable,
+  TextInput,
   Image,
   ScrollView,
   Modal,
+  SafeAreaView,
 } from 'react-native';
 import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Icon from 'react-native-vector-icons/Ionicons';
 import Style from './Style';
 import CameraVision from '../../CameraVision/CameraVision';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import WelcomePage from './WelcomePage';
 import SignUp from './SignUp';
 import LoginPage from './LoginPage';
+import ScannedPages from './ScannedPages';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 const Cards = () => {
   return (
-    <View
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '50%',
-      }}>
-      <Text style={{fontSize: 20, fontWeight: '900'}}>Cards</Text>
+    <View style={{flex: 1}}>
+      <View style={Style.cardHeader}>
+        <Text>Hey, John</Text>
+        <Image
+          source={require('./Images/userLogin.png')}
+          style={{
+            height: 46,
+            width: 46,
+            backgroundColor: '#F4F6FD',
+            borderRadius: 20,
+          }}
+        />
+      </View>
+      <View style={Style.card}>
+        <Image source={require('./Images/fileRecord.png')} />
+        <Text
+          style={{
+            fontSize: 18,
+            color: '#2242D8',
+            fontWeight: '500',
+            marginTop: 24,
+          }}>
+          Nothing in your card list!
+        </Text>
+        <Text
+          style={{
+            width: 201,
+            height: 32,
+            color: '#869BFF',
+            fontSize: 12,
+            fontWeight: '500',
+            marginTop: 8,
+            textAlign: 'center',
+          }}>
+          No worried make your first digital business card now{' '}
+        </Text>
+      </View>
     </View>
   );
 };
@@ -42,9 +75,6 @@ const ScanCard = ({navigation}) => {
     <View style={Style.scanContainer}>
       <Text style={Style.scanText}>Scan card</Text>
       <View style={Style.innerDiv}>
-        {/* <Ion name="scan-outline" style={Style.scanneroutline} />
-        <FontAwesome5 name="file" style={Style.scanFile} />
-        <Ion name="remove-outline" style={Style.horizontalLine} /> */}
         <Image source={require('./Images/Scan.png')} />
         <Text style={Style.scanNewCard}>Scan a new card</Text>
         <Text style={Style.ScanDesc}>
@@ -160,16 +190,96 @@ const AddCard = () => {
     </ScrollView>
   );
 };
-const Contacts = () => {
+const Contacts = ({navigation}) => {
+  const data = [
+    {
+      title: 'All contacts',
+      count: '35 contacts',
+      logo: require('./Images/allContact.png'),
+      directory: [
+        require('./Images/allContacts/all3.png'),
+        require('./Images/allContacts/all2.png'),
+        require('./Images/allContacts/all1.png'),
+      ],
+    },
+    {
+      title: 'Recently added',
+      count: '30 contacts',
+      logo: require('./Images/recentlyAdded.png'),
+      directory: [
+        require('./Images/recentlyAdded/recent3.png'),
+        require('./Images/recentlyAdded/recent2.png'),
+        require('./Images/recentlyAdded/recent1.png'),
+      ],
+    },
+    {
+      title: 'Live contacts',
+      count: '40 contacts',
+      logo: require('./Images/liveChat.png'),
+      directory: [
+        require('./Images/liveContacts/live3.png'),
+        require('./Images/liveContacts/live2.png'),
+        require('./Images/liveContacts/live1.png'),
+      ],
+    },
+    {
+      title: 'Scanned',
+      count: '0 contacts',
+      logo: require('./Images/empty.png'),
+      directory: [
+        require('./Images/emptySmall.png'),
+        require('./Images/emptySmall.png'),
+        require('./Images/emptySmall.png'),
+      ],
+    },
+  ];
+  const scanned = contactBtn => {
+    if (contactBtn === 'Scanned') {
+      navigation.navigate('ScanedContacts');
+    }
+  };
   return (
-    <View
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '50%',
-      }}>
-      <Text style={{fontSize: 20, fontWeight: '900'}}>Contacts</Text>
+    <View style={{flex: 1, alignSelf: 'center'}}>
+      <View style={Style.contactHeader}>
+        <Text style={Style.contactText}>Contacts</Text>
+        <Pressable style={Style.createBtn}>
+          <Text style={Style.createBtnText}>+ Create group</Text>
+        </Pressable>
+      </View>
+      <View style={Style.searchBar}>
+        <View style={Style.search}>
+          <Icon name="search" size={25} style={Style.searchGlass} />
+          <TextInput
+            placeholder="Search by job, name..."
+            style={Style.searchInput}
+          />
+        </View>
+        <View style={Style.filter}>
+          <Image source={require('./Images/filter.png')} />
+        </View>
+      </View>
+      <FlatList
+        data={data}
+        renderItem={({item}) => (
+          <Pressable
+            style={Style.contactBtn}
+            onPress={() => scanned(item.title)}>
+            <Image source={item.logo} />
+            <Image style={Style.small3} source={item.directory[2]} />
+            <Image style={Style.small2} source={item.directory[1]} />
+            <Image style={Style.small1} source={item.directory[0]} />
+            <View style={{flex: 1, marginLeft: 38}}>
+              <Text style={{fontSize: 16, fontWeight: '500', color: '#2242D8'}}>
+                {item.title}
+              </Text>
+              <Text style={{fontSize: 12, fontWeight: '400', color: '#8B9CEB'}}>
+                {item.count}
+              </Text>
+            </View>
+            <FontAwesome5 name="chevron-right" style={Style.next} />
+          </Pressable>
+        )}
+      />
     </View>
   );
 };
@@ -269,6 +379,9 @@ const Profile = () => {
   return (
     // <NavigationContainer>
     <Tab.Navigator
+      // tabBarOptions={{
+      //   keyboardHidesTabBar: true,
+      // }}
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, size, color}) => {
           let iconName;
@@ -350,6 +463,11 @@ const ScreenNavigation = () => {
           name="Login"
           component={LoginPage}
           options={{title: null}}
+        />
+        <Stack.Screen
+          name="ScanedContacts"
+          component={ScannedPages}
+          options={{header: () => null}}
         />
       </Stack.Navigator>
     </NavigationContainer>

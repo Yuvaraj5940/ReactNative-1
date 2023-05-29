@@ -11,6 +11,8 @@ import {name as appName} from './app.json';
 import Profile from './Components/Figma/Profile/Profile';
 // import CameraVision from './Components/CameraVision/CameraVision';
 // import OpenGallery from './Components/openGallery/OpenGallery';
-import ModalBox from './Components/ModalBox/ModalBox';
+// import ModalBox from './Components/ModalBox/ModalBox';
+// import Login from './Components/AsyncStorage/Login';
+// import AsyncStackNav from './Components/AsyncStorage/AsyncStackNav';
 
 AppRegistry.registerComponent(appName, () => Profile);
