@@ -105,8 +105,8 @@ const styles = StyleSheet.create({
     lineHeight: 15.6,
   },
   LogoutBtn: {
-    position: 'absolute',
-    bottom: 260,
+    position: 'relative',
+    top: 10,
     marginLeft: 16,
   },
   outConfirm: {

@@ -2,12 +2,33 @@
 import {View, Text, FlatList, Pressable, Image, TextInput} from 'react-native';
 import React from 'react';
 import Style from './Style';
+import Icon from 'react-native-vector-icons/Ionicons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginPage = ({navigation}) => {
   const data = ['Email Address', 'Password'];
+  const tkn = async () => {
+    const res = await AsyncStorage.getItem('user');
+    const newres = await JSON.parse(res);
+    if (newres) {
+      console.warn(newres.name);
+    }
+  };
   return (
     <View style={Style.signupContainer}>
       <View style={{width: 325, height: 67, marginTop: 16}}>
+        <Pressable
+          style={{
+            width: 40,
+            height: 40,
+            backgroundColor: '#F5F7FD',
+            borderRadius: 20,
+            alignItems: 'center',
+            marginBottom: 20,
+          }}
+          onPress={() => navigation.navigate('Welcome')}>
+          <Icon name="arrow-back-outline" size={35} color="#2242D8" />
+        </Pressable>
         <Text
           style={{
             color: '#8899EA',
@@ -49,18 +70,22 @@ const LoginPage = ({navigation}) => {
           Enter your Email and password to continue
         </Text>
       </View>
-      <View style={{marginTop: 52, marginBottom: 29}}>
+      <View style={{marginTop: 100, marginBottom: 20}}>
         <FlatList
           data={data}
           renderItem={({item}) => (
             <View style={Style.inputContainer}>
               <Text style={Style.placeholderTop}>{item}</Text>
-              <TextInput style={Style.placeholderBottom}>{item}</TextInput>
+              <TextInput style={Style.placeholderBottom} placeholder={item} />
             </View>
           )}
         />
       </View>
-      <Text style={Style.forgotPassword}>Forgot password?</Text>
+      <Text
+        style={{color: 'blue', position: 'absolute', top: 350}}
+        onPress={tkn}>
+        Forgot password?
+      </Text>
       <View style={Style.LoginDiv}>
         <View style={Style.loginFrstLine} />
         <Text style={Style.divText}>or</Text>

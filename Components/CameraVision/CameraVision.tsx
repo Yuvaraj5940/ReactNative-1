@@ -44,7 +44,7 @@ const CameraVision = () => {
   };
 
   if (device == null) {
-    return <ActivityIndicator />;
+    return <ActivityIndicator size="large" />;
   }
   const openGallery = () => {
     const options: CameraOptions = {
