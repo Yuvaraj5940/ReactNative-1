@@ -13,7 +13,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginPage = ({navigation}) => {
-  const data = ['Email Address', 'Password'];
   const [mail, setMail] = useState('');
   const [password, setPassword] = useState('');
   const [ShowP, setShowP] = useState(true);
@@ -30,7 +29,10 @@ const LoginPage = ({navigation}) => {
     const newres = await JSON.parse(res);
     if (newres.email === mail && newres.passsword === password) {
       // console.warn(newres.email, newres.passsword);
+      setMail('');
+      setPassword('');
       navigation.navigate('Bottom');
+
     } else {
       console.warn('Enter password');
     }
