@@ -2,6 +2,8 @@ import {Text, View, Image, Pressable, FlatList, Modal} from 'react-native';
 import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 export default function Cards({navigation}) {
   const [active, setactive] = useState(false);
@@ -23,7 +25,7 @@ export default function Cards({navigation}) {
     },
   ];
   return (
-    <View style={styles.container}>
+    <View style={active ? styles.opacity : styles.container}>
       {Data.length ? (
         <View>
           <View style={styles.Topdiv}>
@@ -74,12 +76,12 @@ export default function Cards({navigation}) {
                     <Pressable
                       style={styles.srbtn1}
                       onPress={() => navigation.navigate('edit')}>
-                      <Icon name="pencil-outline" size={12} color="#2242D8" />
+                      <AntDesign name="edit" size={12} color="#2242D8" />
                       <Text style={styles.srbtnText}>Eddit</Text>
                     </Pressable>
 
                     <Pressable style={styles.srbtn2}>
-                      <Icon name="id-card-outline" size={12} color="#2242D8" />
+                      <Fontisto name="preview" size={12} color="#2242D8" />
                       <Text style={styles.srbtnText}>Preview card</Text>
                     </Pressable>
                     <Pressable style={styles.srbtn3}>
@@ -107,7 +109,7 @@ export default function Cards({navigation}) {
               justifyContent: 'flex-end',
               alignItems: 'center',
               marginRight: 20,
-              marginTop: 20,
+              // marginTop: 20,
             }}>
             <Text
               style={{
@@ -227,6 +229,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
+    // backgroundColor:'#4CD2DB',
     paddingHorizontal: 25,
   },
   Box: {
@@ -327,7 +330,7 @@ const styles = StyleSheet.create({
   },
   modeldiv: {
     width: '100%',
-    height: '28%',
+    height: '33%',
     position: 'absolute',
     bottom: 10,
     borderWidth: 1,
@@ -336,7 +339,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     // justifyContent:'center'
-    padding: 10,
+    padding: 15,
   },
   modelbtn: {
     width: 60,
@@ -358,5 +361,12 @@ const styles = StyleSheet.create({
   cardText: {
     fontSize: 12,
     color: '#000000',
+  },
+  opacity: {
+    opacity: 0.2,
+    backgroundColor: '#C0C0C0',
+    width: '100%',
+    height: '70%',
+    paddingHorizontal: 25,
   },
 });

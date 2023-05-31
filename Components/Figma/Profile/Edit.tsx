@@ -1,9 +1,10 @@
 import React from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, ScrollView, Pressable, StyleSheet} from 'react-native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import General from './General';
 import Display from './Display';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -25,11 +26,22 @@ const Links = () => {
 function MyTabs() {
   return (
     // <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="general" component={General} />
-        <Tab.Screen name="display" component={Display} />
-        <Tab.Screen name="links" component={Links} />
-      </Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={({route}) => ({
+        tabBarItemStyle: {
+          borderColor: '#EEEEEE',
+          borderWidth: 1,
+          borderRadius: 20,
+          backgroundColor: '#EEEEEE',
+          margin: 10,
+          activeTintColor: '#2242D8',
+          inactiveTintColor: '#8D8D8D',
+        },
+      })}>
+      <Tab.Screen name="general" component={General} />
+      <Tab.Screen name="display" component={Display} />
+      <Tab.Screen name="links" component={Links} />
+    </Tab.Navigator>
     // </NavigationContainer>
   );
 }
@@ -40,13 +52,55 @@ function MyTabs() {
 //
 //   );
 // };
-const Edit = () => {
+const Edit = ({navigation}) => {
   return (
     <>
-      <Text>Edit</Text>
+      <View style={styles.Topdiv}>
+        <Pressable
+          style={styles.Crosbtn}
+          onPress={() => navigation.navigate('Bottom')}>
+          <Icon name="close" size={25} color="#2242D8" />
+        </Pressable>
+        <Text style={styles.heading}>Edit Card</Text>
+        <Pressable style={styles.Savebtn}>
+          <Text style={{color: '#2242D8'}}>Save</Text>
+        </Pressable>
+      </View>
       <MyTabs />
     </>
   );
 };
 
 export default Edit;
+
+const styles = StyleSheet.create({
+  Topdiv: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    padding: 10,
+    gap: 5,
+    borderWidth: 1,
+    borderBottomColor: '#EEEEEE',
+    backgroundColor: '#FFFFFF',
+  },
+  Crosbtn: {
+    width: 40,
+    height: 40,
+    backgroundColor: '#EAEDFB',
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  Savebtn: {
+    width: 75,
+    height: 30,
+    backgroundColor: '#EAEDFB',
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  heading: {color: '#2242D8', fontSize: 20, fontWeight: 'bold'},
+});

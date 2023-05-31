@@ -1,8 +1,24 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, Pressable, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const Display = () => {
+  const Clr = [
+    {colr: '#C0C0C0'},
+    {colr: '#808080'},
+    {colr: '#000000'},
+    {colr: '#FF0000'},
+    {colr: '#800000'},
+    {colr: '#FFFF00'},
+    {colr: '#808000'},
+    {colr: '#00FF00'},
+    {colr: '#008000'},
+    {colr: '#00FFFF'},
+    {colr: '#008080'},
+    {colr: '#800080'},
+    {colr: '#FF00FF'},
+    {colr: '#000080'},
+  ];
   return (
     <View style={styles.Container}>
       <Text style={styles.ch2}>Profile Photo</Text>
@@ -23,6 +39,31 @@ const Display = () => {
         </View>
       </View>
       <Text style={styles.ch2}>Card color</Text>
+      <View style={styles.colorDiv}>
+        <Pressable style={styles.addcolor}>
+          <Icon name="add" size={25} color="#2242D8" />
+        </Pressable>
+        {/* <View style={styles.selectcolor} /> */}
+        {/* <View style={{display: 'flex', flexDirection: 'row'}}> */}
+        <FlatList
+          data={Clr}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({item}) => (
+            <View
+              style={{
+                width: 29,
+                height: 28,
+                borderRadius: 15,
+                marginLeft: 5,
+                padding:2,
+                backgroundColor: `${item.colr}`,
+              }}
+            />
+          )}
+        />
+        {/* </View> */}
+      </View>
       <Text style={styles.ch2}>Logo</Text>
       <View style={styles.frow}>
         <View style={styles.Limg}>
@@ -81,6 +122,8 @@ const styles = StyleSheet.create({
     gap: 10,
     paddingHorizontal: 15,
     left: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   frow: {
     display: 'flex',
@@ -98,5 +141,30 @@ const styles = StyleSheet.create({
     backgroundColor: '#E9ECFB',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  colorDiv: {
+    borderColor: '#E9ECFB',
+    width: '100%',
+    height: 40,
+    borderRadius: 20,
+    borderWidth: 1,
+    padding: 5,
+    display: 'flex',
+    gap: 5,
+    flexDirection: 'row',
+  },
+  addcolor: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: '#E9ECFB',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  selectcolor: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: '#E9ECFB',
   },
 });

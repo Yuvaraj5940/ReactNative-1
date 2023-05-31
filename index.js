@@ -21,4 +21,4 @@ import ScreenNavigation from './Components/Figma/Profile/Profile';
 // import OpenGallery from './Components/openGallery/OpenGallery';
 // import ModalBox from './Components/ModalBox/ModalBox';
 
-AppRegistry.registerComponent(appName, () => ScreenNavigation);
+AppRegistry.registerComponent(appName, () => Profile);

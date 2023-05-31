@@ -1,19 +1,41 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, FlatList, Pressable, Image, TextInput} from 'react-native';
-import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  Image,
+  TextInput,
+} from 'react-native';
+import React, {useState} from 'react';
 import Style from './Style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginPage = ({navigation}) => {
   const data = ['Email Address', 'Password'];
+  const [mail, setMail] = useState('');
+  const [password, setPassword] = useState('');
+  const [ShowP, setShowP] = useState(true);
+
   const tkn = async () => {
     const res = await AsyncStorage.getItem('user');
     const newres = await JSON.parse(res);
     if (newres) {
-      console.warn(newres.name);
+      console.warn(newres.email, newres.passsword);
     }
   };
+  const Validate = async () => {
+    const res = await AsyncStorage.getItem('user');
+    const newres = await JSON.parse(res);
+    if (newres.email === mail && newres.passsword === password) {
+      // console.warn(newres.email, newres.passsword);
+      navigation.navigate('Bottom');
+    } else {
+      console.warn('Enter password');
+    }
+  };
+
   return (
     <View style={Style.signupContainer}>
       <View style={{width: 325, height: 67, marginTop: 16}}>
@@ -71,15 +93,34 @@ const LoginPage = ({navigation}) => {
         </Text>
       </View>
       <View style={{marginTop: 100, marginBottom: 20}}>
-        <FlatList
-          data={data}
-          renderItem={({item}) => (
-            <View style={Style.inputContainer}>
-              <Text style={Style.placeholderTop}>{item}</Text>
-              <TextInput style={Style.placeholderBottom} placeholder={item} />
-            </View>
-          )}
-        />
+        <View style={Style.inputContainer}>
+          <TextInput
+            style={Style.placeholderBottom}
+            placeholder="Enter email"
+            keyboardType="email-address"
+            value={mail}
+            onChangeText={value => setMail(value)}
+          />
+        </View>
+        <View style={styles.passdiv}>
+          <TextInput
+            style={styles.InputTextp}
+            placeholder="Enter password"
+            secureTextEntry={ShowP}
+            value={password}
+            onChangeText={value => setPassword(value)}
+          />
+          <Pressable
+            style={{
+              width: 50,
+              height: 40,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            onPress={() => (ShowP ? setShowP(false) : setShowP(true))}>
+            <Icon name="eye-off-outline" size={30} color="#2242D8" />
+          </Pressable>
+        </View>
       </View>
       <Text
         style={{color: 'blue', position: 'absolute', top: 350}}
@@ -100,9 +141,7 @@ const LoginPage = ({navigation}) => {
           </Text>
         </Pressable>
       </View>
-      <Pressable
-        style={Style.nxtBtn}
-        onPress={() => navigation.navigate('Bottom')}>
+      <Pressable style={Style.nxtBtn} onPress={Validate}>
         <Text style={{fontSize: 16, color: '#FFFFFF', fontWeight: '500'}}>
           Next
         </Text>
@@ -112,3 +151,23 @@ const LoginPage = ({navigation}) => {
 };
 
 export default LoginPage;
+const styles = StyleSheet.create({
+  passdiv: {
+    borderWidth: 1,
+    width: 325,
+    height: 67,
+    marginBottom: 10,
+    paddingVertical: 15,
+    borderRadius: 20,
+    borderColor: '#2242D8B2',
+    paddingHorizontal: 25,
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  InputTextp: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#2242D8',
+    flex: 1,
+  },
+});

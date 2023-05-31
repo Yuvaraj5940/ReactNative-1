@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   Pressable,
@@ -6,22 +6,17 @@ import {
   Text,
   TextInput,
   View,
-  Modal
+  Modal,
 } from 'react-native';
 import Style from './Style';
 
 import Icon from 'react-native-vector-icons/AntDesign';
 
 const Setting = ({navigation}) => {
-    const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   return (
-    <View
-      style={{
-        padding: 10,
-        alignItems: 'center',
-        marginBottom: 20,
-      }}>
+    <View style={loading ? styles.opa : styles.opaf}>
       <View
         style={{
           width: '100%',
@@ -127,7 +122,8 @@ const Setting = ({navigation}) => {
                   }}>
                   Are you sure want to logout?
                 </Text>
-                <Text style={{width: 181, textAlign: 'center', color: '#2242D8'}}>
+                <Text
+                  style={{width: 181, textAlign: 'center', color: '#2242D8'}}>
                   You will need to again enter your details to login
                 </Text>
               </View>
@@ -199,5 +195,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
   },
-
+  opa: {
+    padding: 10,
+    alignItems: 'center',
+    // marginBottom: 20,
+    opacity: 0.1,
+  },
+  opaf: {
+    padding: 10,
+    alignItems: 'center',
+    // marginBottom: 20,
+  },
 });

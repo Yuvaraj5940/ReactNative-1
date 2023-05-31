@@ -371,20 +371,21 @@ const ScreenNavigation = () => {
         />
         <Stack.Screen name="Scan Id" component={CamPage} />
         <Stack.Screen
+          name="edit"
+          component={Edit}
+          options={{header: () => null}}
+        />
+        <Stack.Screen
           name="Cards"
           component={Cards}
-          options={{title: () => null}}
+          options={{header: () => null}}
         />
         <Stack.Screen
           name="scdp"
           component={ScannedP}
           options={{header: () => null}}
         />
-        <Stack.Screen
-          name="edit"
-          component={Edit}
-          options={{header: () => null}}
-        />
+      
       </Stack.Navigator>
     </NavigationContainer>
   );
