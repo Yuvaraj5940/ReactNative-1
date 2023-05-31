@@ -25,6 +25,9 @@ import Cards from './Cards';
 import ScannedPages from './Scannedcontacts';
 import ScannedP from './scaned';
 import MyTabs from './Edit';
+import Edit from './Edit';
+import Display from './Display';
+import Prac from './Prac';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -351,10 +354,10 @@ const ScreenNavigation = () => {
           component={LoginPage}
           options={{header: () => null}}
         />
-        <Stack.Screen
-          name="tabs"
-          component={MyTabs}
-          options={{title: () => null}}
+         <Stack.Screen
+          name="Prac"
+          component={Prac}
+          options={{header: () => null}}
         />
         <Stack.Screen
           name="Welcome"
@@ -377,11 +380,11 @@ const ScreenNavigation = () => {
           component={ScannedP}
           options={{header: () => null}}
         />
-        {/* <Stack.Screen
-          name="tabs"
-          component={Display}
-          options={{title: () => null}}
-        /> */}
+        <Stack.Screen
+          name="edit"
+          component={Edit}
+          options={{header: () => null}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

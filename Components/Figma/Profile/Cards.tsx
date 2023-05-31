@@ -73,7 +73,7 @@ export default function Cards({navigation}) {
                   <View style={styles.secondrow}>
                     <Pressable
                       style={styles.srbtn1}
-                      onPress={() => navigation.navigate('tabs')}>
+                      onPress={() => navigation.navigate('edit')}>
                       <Icon name="pencil-outline" size={12} color="#2242D8" />
                       <Text style={styles.srbtnText}>Eddit</Text>
                     </Pressable>

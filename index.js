@@ -13,8 +13,12 @@ import Firstpage from './Components/Asyncstore.tsx/firstpage';
 import Cards from './Components/Figma/Profile/Cards';
 // import Edit from './Components/Figma/Profile/Edit';
 import MyTabs from './Components/Figma/Profile/Edit';
+import {NavigationContainer} from '@react-navigation/native';
+import App from './App';
+import Edit from './Components/Figma/Profile/Edit';
+import ScreenNavigation from './Components/Figma/Profile/Profile';
 // import CameraVision from './Components/CameraVision/CameraVision';
 // import OpenGallery from './Components/openGallery/OpenGallery';
 // import ModalBox from './Components/ModalBox/ModalBox';
 
-AppRegistry.registerComponent(appName, () => Profile);
+AppRegistry.registerComponent(appName, () => ScreenNavigation);
