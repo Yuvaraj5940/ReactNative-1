@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import {
   View,
   Text,
@@ -8,10 +7,9 @@ import {
   TextInput,
 } from 'react-native';
 import React, {useState} from 'react';
-// import Style from './Style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Formik, Form, Field} from 'formik';
+import {Formik} from 'formik';
 import * as Yup from 'yup';
 
 const SignupSchema = Yup.object().shape({
@@ -28,8 +26,6 @@ const SignupSchema = Yup.object().shape({
 });
 
 const LoginPage = ({navigation}) => {
-  // const [mail, setMail] = useState('');
-  const [password, setPassword] = useState('');
   const [ShowP, setShowP] = useState(true);
 
   const tkn = async () => {
@@ -40,8 +36,6 @@ const LoginPage = ({navigation}) => {
     }
   };
   const Validate = async x => {
-    // console.warn(x);
-
     const res = await AsyncStorage.getItem('user');
     const newres = await JSON.parse(res);
     if (newres.email === x.Email && newres.passsword === x.Password) {
@@ -131,7 +125,13 @@ const LoginPage = ({navigation}) => {
             <View style={{width: '100%', padding: 10}}>
               <View>
                 <TextInput
-                  style={[styles.passdiv, {borderColor: isValid ? '#131d20':'#e5232e'}]}
+                  style={[
+                    styles.passdiv,
+                    {
+                      borderColor:
+                        touched.Email && errors.Email ? '#e5232e' : '#131d20',
+                    },
+                  ]}
                   // editable={true}
                   placeholder="Enter email"
                   keyboardType="email-address"
@@ -143,7 +143,16 @@ const LoginPage = ({navigation}) => {
               {touched.Email && errors.Email && (
                 <Text style={styles.erText}>{errors.Email}</Text>
               )}
-              <View style={styles.passdiv}>
+              <View
+                style={[
+                  styles.passdiv,
+                  {
+                    borderColor:
+                      touched.Password && errors.Password
+                        ? '#e5232e'
+                        : '#131d20',
+                  },
+                ]}>
                 <TextInput
                   style={styles.InputTextp}
                   placeholder="Enter password"
