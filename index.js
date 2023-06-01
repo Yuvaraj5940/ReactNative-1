@@ -17,6 +17,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import App from './App';
 import Edit from './Components/Figma/Profile/Edit';
 import ScreenNavigation from './Components/Figma/Profile/Profile';
+import Links from './Components/Figma/Profile/Link';
 // import CameraVision from './Components/CameraVision/CameraVision';
 // import OpenGallery from './Components/openGallery/OpenGallery';
 // import ModalBox from './Components/ModalBox/ModalBox';

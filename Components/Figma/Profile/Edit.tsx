@@ -5,6 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import General from './General';
 import Display from './Display';
 import Icon from 'react-native-vector-icons/Ionicons';
+// import Links from './Link';
 
 const Tab = createMaterialTopTabNavigator();
 
