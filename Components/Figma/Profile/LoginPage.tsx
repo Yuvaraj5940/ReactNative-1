@@ -142,7 +142,7 @@ const LoginPage = ({navigation}) => {
               </View>
               {touched.Email && errors.Email && (
                 <Text style={styles.erText}>{errors.Email}</Text>
-              )}
+              )} 
               <View
                 style={[
                   styles.passdiv,

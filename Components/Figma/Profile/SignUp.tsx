@@ -12,7 +12,7 @@ import Style from './Style';
 import Checkbox from 'expo-checkbox';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Formik, Form, Field} from 'formik';
+import {Formik} from 'formik';
 import * as Yup from 'yup';
 
 const SignupSchema = Yup.object().shape({
